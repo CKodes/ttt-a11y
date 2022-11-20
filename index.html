@@ -9,6 +9,16 @@
     <title>Tic Tac Toe Game</title>
   </head>
   <body>
+    <div id="playerTurn" aria-live="assertive"></div>
+    <div
+      id="boardAnnouncer"
+      class="visually-hidden"
+      aria-live="assertive"
+    ></div>
+    <button id="announcer-button" onclick="readBoardStatus()">
+      Board Status
+    </button>
+
     <div class="board" id="board">
       <div class="cell" vertical="top" horizontal="left" data-cell></div>
       <div class="cell" vertical="top" horizontal="center" data-cell></div>
