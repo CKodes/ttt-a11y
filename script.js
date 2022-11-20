@@ -37,9 +37,27 @@ function addButtons(e) {
       let buttonElement = document.createElement('button');
       cell.appendChild(buttonElement);
       buttonElement.classList.add('action-button');
-      buttonElement.innerHTML = `${
-        circleTurn ? 'Place O Symbol' : 'Place X Symbol'
-      }`;
+      //   console.log(buttonElement.parentElement.attributes[1].value);
+
+      let insideBtns = document.querySelectorAll('.action-button');
+      insideBtns.forEach(addName);
+
+      // Add direction from html attributes to button innerHTML
+      function addName() {
+        buttonElement.setAttribute(
+          'vertical',
+          buttonElement.parentElement.attributes[1].value
+        );
+        buttonElement.setAttribute(
+          'horizontal',
+          buttonElement.parentElement.attributes[2].value
+        );
+        buttonElement.innerHTML = `${
+          circleTurn ? 'Place O symbol to' : 'Place X symbol to'
+        }
+        ${buttonElement.attributes[1].value}
+        ${buttonElement.attributes[2].value} `;
+      }
     });
     document.removeEventListener('keydown', addButtons);
   }
@@ -120,9 +138,13 @@ function swapTurns() {
 
   let cellBtn = document.getElementsByClassName('action-button');
   for (var i = 0; i < cellBtn.length; i++) {
+    console.log(cellBtn[i].parentNode.attributes[1].value);
+
     cellBtn[i].innerHTML = `${
-      circleTurn ? 'Place O Symbol' : 'Place X Symbol'
-    }`;
+      circleTurn ? 'Place O symbol to' : 'Place X symbol to'
+    }
+        ${cellBtn[i].parentNode.attributes[1].value}
+        ${cellBtn[i].parentNode.attributes[2].value} `;
   }
 }
 
