@@ -1,6 +1,18 @@
 const X_CLASS = 'x';
 const CIRCLE_CLASS = 'circle';
 
+// Create an array of all winning combinations
+const WIN_COMBO = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
+
 // Grab all cells from html
 const cellElements = document.querySelectorAll('[data-cell]');
 
@@ -34,10 +46,17 @@ function handleTab(e) {
 }
 */
 
-// add click listener to the cells and once only
-cellElements.forEach((cell) => {
-  cell.addEventListener('click', handleClick, { once: true });
-});
+startGame();
+
+function startGame() {
+  circleTurn = false;
+
+  // add click listener to the cells and once only
+  cellElements.forEach((cell) => {
+    cell.addEventListener('click', handleClick, { once: true });
+  });
+  setBoardHoverClass();
+}
 
 function handleClick(e) {
   const cell = e.target;
