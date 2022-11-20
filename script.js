@@ -24,6 +24,10 @@ const restartButton = document.getElementById('restartButton');
 
 const winMsgElement = document.getElementById('winMsg');
 const winMsgTextElement = document.querySelector('[data-win-msg-text]');
+
+const turnText = document.querySelector('#playerTurn');
+const boardText = document.querySelector('#boardAnnouncer');
+
 let circleTurn;
 
 startGame();
@@ -35,9 +39,12 @@ function addButtons(e) {
     //if tab is pressed, add buttons to all cells
     cellElements.forEach((cell) => {
       let buttonElement = document.createElement('button');
+      let paraElement = document.createElement('p');
       cell.appendChild(buttonElement);
+      cell.appendChild(paraElement);
       buttonElement.classList.add('action-button');
-      //   console.log(buttonElement.parentElement.attributes[1].value);
+      paraElement.classList.add('visually-hidden');
+      paraElement.innerHTML = 'empty';
 
       let insideBtns = document.querySelectorAll('.action-button');
       insideBtns.forEach(addName);
@@ -70,6 +77,9 @@ function startGame() {
   // Add listener to entire document when tab key is pressed to insert buttons
   document.addEventListener('keydown', addButtons);
   circleTurn = false;
+  turnText.innerHTML = 'Player X Turn';
+  // readBoardStatus('The board is empty');
+  // boardText.innerHTML = 'The board is empty';
 
   cellElements.forEach((cell) => {
     // resets before game starts again
@@ -127,6 +137,8 @@ function placeMark(cell, currentClass) {
   // remove button element after a symbol is placed using tab
   if (cell.hasChildNodes()) {
     cell.parentNode.classList.add(currentClass);
+    console.log(cell.parentNode.childNodes[1]);
+    cell.parentNode.childNodes[1].innerHTML = currentClass;
     cell.remove();
   } else {
     cell.classList.add(currentClass);
@@ -135,10 +147,12 @@ function placeMark(cell, currentClass) {
 
 function swapTurns() {
   circleTurn = !circleTurn;
+  turnText.innerHTML = `${circleTurn ? 'Player O Turn' : 'Player X Turn'}`;
+  readBoardStatus();
 
   let cellBtn = document.getElementsByClassName('action-button');
   for (var i = 0; i < cellBtn.length; i++) {
-    console.log(cellBtn[i].parentNode.attributes[1].value);
+    // console.log(cellBtn[i].parentNode.attributes[1].value);
 
     cellBtn[i].innerHTML = `${
       circleTurn ? 'Place O symbol to' : 'Place X symbol to'
@@ -164,4 +178,89 @@ function checkWin(currentClass) {
       return cellElements[index].classList.contains(currentClass);
     });
   });
+}
+
+function readBoardStatus() {
+  let sentence = [
+    cellElements[0].attributes[1].value +
+      ' ' +
+      cellElements[0].attributes[2].value +
+      ' is ' +
+      cellElements[0].lastChild.innerHTML +
+      ',',
+    cellElements[1].attributes[1].value +
+      ' ' +
+      cellElements[1].attributes[2].value +
+      ' is ' +
+      cellElements[1].lastChild.innerHTML +
+      ',',
+    cellElements[2].attributes[1].value +
+      ' ' +
+      cellElements[2].attributes[2].value +
+      ' is ' +
+      cellElements[2].lastChild.innerHTML +
+      ',',
+    cellElements[3].attributes[1].value +
+      ' ' +
+      cellElements[3].attributes[2].value +
+      ' is ' +
+      cellElements[3].lastChild.innerHTML +
+      ',',
+    cellElements[4].attributes[1].value +
+      ' ' +
+      cellElements[4].attributes[2].value +
+      ' is ' +
+      cellElements[4].lastChild.innerHTML +
+      ',',
+    cellElements[5].attributes[1].value +
+      ' ' +
+      cellElements[5].attributes[2].value +
+      ' is ' +
+      cellElements[5].lastChild.innerHTML +
+      ',',
+    cellElements[6].attributes[1].value +
+      ' ' +
+      cellElements[6].attributes[2].value +
+      ' is ' +
+      cellElements[6].lastChild.innerHTML +
+      ',',
+    cellElements[7].attributes[1].value +
+      ' ' +
+      cellElements[7].attributes[2].value +
+      ' is ' +
+      cellElements[7].lastChild.innerHTML +
+      ',',
+  ];
+
+  boardText.innerHTML =
+    sentence[0] +
+    ' ' +
+    sentence[1] +
+    ' ' +
+    sentence[2] +
+    ' ' +
+    sentence[3] +
+    ' ' +
+    sentence[4] +
+    ' ' +
+    sentence[5] +
+    ' ' +
+    sentence[6] +
+    ' ' +
+    sentence[7];
+
+  // console.log(boardText.innerHTML);
+
+  // for (var i = 0; i < cellElements.length; i++) {
+  //   let verticalText = cellElements[i].attributes[1].value;
+  //   let horizontalText = cellElements[i].attributes[2].value;
+
+  //   let sentence =
+  //     verticalText +
+  //     ' ' +
+  //     horizontalText +
+  //     ' ' +
+  //     'is ' +
+  //     cellElements[i].lastChild.innerHTML;
+  // }
 }
