@@ -26,11 +26,9 @@ const winMsgElement = document.getElementById('winMsg');
 const winMsgTextElement = document.querySelector('[data-win-msg-text]');
 let circleTurn;
 
-// Add kb listener to document
-/*
-document.addEventListener('keydown', handleTab);
+startGame();
 
-function handleTab(e) {
+function addButtons(e) {
   if (e.key === 'Tab') {
     console.log('tab key pressed');
 
@@ -39,32 +37,29 @@ function handleTab(e) {
       let buttonElement = document.createElement('button');
       cell.appendChild(buttonElement);
       buttonElement.classList.add('action-button');
-      buttonElement.innerHTML = `Add X or O to this cell`;
-
-      // Add listener to button inside cell
-      buttonElement.addEventListener('click', () => {
-        console.log('button clicked');
-      });
+      buttonElement.innerHTML = `${
+        circleTurn ? 'Place O Symbol' : 'Place X Symbol'
+      }`;
     });
-
-    document.removeEventListener('keydown', handleTab);
+    document.removeEventListener('keydown', addButtons);
   }
 }
-*/
-
-startGame();
 
 // Add listener to restart button
 restartButton.addEventListener('click', startGame);
 
 function startGame() {
+  // Add listener to entire document when tab key is pressed to insert buttons
+  document.addEventListener('keydown', addButtons);
   circleTurn = false;
 
-  // add click listener to the cells and once only
   cellElements.forEach((cell) => {
+    // resets before game starts again
     cell.classList.remove(X_CLASS);
     cell.classList.remove(CIRCLE_CLASS);
     cell.removeEventListener('click', handleClick);
+
+    // add click listener to the cells and once only
     cell.addEventListener('click', handleClick, { once: true });
   });
   setBoardHoverClass();
@@ -75,9 +70,9 @@ function handleClick(e) {
   const cell = e.target;
   const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
   placeMark(cell, currentClass);
+
   if (checkWin(currentClass)) {
     endGame(false);
-    // console.log('winner');
   } else if (isDraw()) {
     endGame(true);
   } else {
@@ -93,6 +88,12 @@ function endGame(draw) {
     winMsgTextElement.innerText = `${circleTurn ? 'O' : 'X'} Wins!`;
   }
 
+  // Removes all innerBtns before showing endgame UI
+  let innerBtns = document.querySelectorAll('.action-button');
+  for (var i = 0; i < innerBtns.length; i++) {
+    innerBtns[i].remove();
+  }
+
   winMsgElement.classList.add('show');
 }
 
@@ -105,11 +106,24 @@ function isDraw() {
 }
 
 function placeMark(cell, currentClass) {
-  cell.classList.add(currentClass);
+  // remove button element after a symbol is placed using tab
+  if (cell.hasChildNodes()) {
+    cell.parentNode.classList.add(currentClass);
+    cell.remove();
+  } else {
+    cell.classList.add(currentClass);
+  }
 }
 
 function swapTurns() {
   circleTurn = !circleTurn;
+
+  let cellBtn = document.getElementsByClassName('action-button');
+  for (var i = 0; i < cellBtn.length; i++) {
+    cellBtn[i].innerHTML = `${
+      circleTurn ? 'Place O Symbol' : 'Place X Symbol'
+    }`;
+  }
 }
 
 function setBoardHoverClass() {
