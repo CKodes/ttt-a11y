@@ -13,13 +13,14 @@ body {
   margin: 0;
 }
 .visually-hidden {
-  clip: rect(0 0 0 0);
+  /* clip: rect(0 0 0 0);
   clip-path: inset(50%);
   height: 1px;
   overflow: hidden;
   position: absolute;
   white-space: nowrap;
-  width: 1px;
+  width: 1px; */
+  display: none;
 }
 .board {
   width: 100vw;
@@ -155,5 +156,9 @@ body {
 }
 
 .win-msg.show {
+  display: flex;
+}
+
+.show {
   display: flex;
 }

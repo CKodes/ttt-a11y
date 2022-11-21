@@ -148,7 +148,7 @@ function placeMark(cell, currentClass) {
 function swapTurns() {
   circleTurn = !circleTurn;
   turnText.innerHTML = `${circleTurn ? 'Player O Turn' : 'Player X Turn'}`;
-  readBoardStatus();
+  // readBoardStatus();
 
   let cellBtn = document.getElementsByClassName('action-button');
   for (var i = 0; i < cellBtn.length; i++) {
@@ -248,6 +248,12 @@ function readBoardStatus() {
     sentence[6] +
     ' ' +
     sentence[7];
+
+  boardText.classList.add('show');
+
+  window.setTimeout(function () {
+    boardText.classList.remove('show');
+  }, 1000);
 
   // console.log(boardText.innerHTML);
 
