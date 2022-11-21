@@ -112,8 +112,10 @@ function handleClick(e) {
 function endGame(draw) {
   if (draw) {
     winMsgTextElement.innerText = 'Draw!';
+    winMsgTextElement.setAttribute('aria-live', 'assertive');
   } else {
     winMsgTextElement.innerText = `${circleTurn ? 'O' : 'X'} Wins!`;
+    winMsgTextElement.setAttribute('aria-live', 'assertive');
   }
 
   // Removes all innerBtns before showing endgame UI
@@ -123,6 +125,7 @@ function endGame(draw) {
   }
 
   winMsgElement.classList.add('show');
+  // winMsgTextElement.removeAttribute('aria-live');
 }
 
 function isDraw() {
@@ -230,6 +233,12 @@ function readBoardStatus() {
       ' is ' +
       cellElements[7].lastChild.innerHTML +
       ',',
+    cellElements[8].attributes[1].value +
+      ' ' +
+      cellElements[8].attributes[2].value +
+      ' is ' +
+      cellElements[8].lastChild.innerHTML +
+      ',',
   ];
 
   boardText.innerHTML =
@@ -247,7 +256,9 @@ function readBoardStatus() {
     ' ' +
     sentence[6] +
     ' ' +
-    sentence[7];
+    sentence[7] +
+    ' ' +
+    sentence[8];
 
   boardText.classList.add('show');
 
