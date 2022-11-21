@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="game.js" defer></script>
+    <title>Tic Tac Toe Game</title>
+  </head>
+  <body>
+    <div id="playerTurn" aria-live="assertive"></div>
+    <div
+      id="boardAnnouncer"
+      class="visually-hidden"
+      aria-live="assertive"
+    ></div>
+    <button id="announcer-button" onclick="readBoardStatus()">
+      Board Status
+    </button>
+
+    <div class="board" id="board">
+      <div class="cell" vertical="top" horizontal="left" data-cell></div>
+      <div class="cell" vertical="top" horizontal="center" data-cell></div>
+      <div class="cell" vertical="top" horizontal="right" data-cell></div>
+      <div class="cell" vertical="center" horizontal="left" data-cell></div>
+      <div class="cell" vertical="center" horizontal="center" data-cell></div>
+      <div class="cell" vertical="center" horizontal="right" data-cell></div>
+      <div class="cell" vertical="bottom" horizontal="left" data-cell></div>
+      <div class="cell" vertical="bottom" horizontal="center" data-cell></div>
+      <div class="cell" vertical="bottom" horizontal="right" data-cell></div>
+    </div>
+    <div class="win-msg" id="winMsg">
+      <div data-win-msg-text></div>
+      <button id="restartButton">Restart</button>
+    </div>
+  </body>
+</html>

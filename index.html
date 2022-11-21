@@ -5,34 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Viga&display=swap"
+      rel="stylesheet"
+    />
+    <script src="index.js"></script>
     <title>Tic Tac Toe Game</title>
   </head>
   <body>
-    <div id="playerTurn" aria-live="assertive"></div>
-    <div
-      id="boardAnnouncer"
-      class="visually-hidden"
-      aria-live="assertive"
-    ></div>
-    <button id="announcer-button" onclick="readBoardStatus()">
-      Board Status
-    </button>
-
     <div class="board" id="board">
-      <div class="cell" vertical="top" horizontal="left" data-cell></div>
-      <div class="cell" vertical="top" horizontal="center" data-cell></div>
-      <div class="cell" vertical="top" horizontal="right" data-cell></div>
-      <div class="cell" vertical="center" horizontal="left" data-cell></div>
-      <div class="cell" vertical="center" horizontal="center" data-cell></div>
-      <div class="cell" vertical="center" horizontal="right" data-cell></div>
-      <div class="cell" vertical="bottom" horizontal="left" data-cell></div>
-      <div class="cell" vertical="bottom" horizontal="center" data-cell></div>
-      <div class="cell" vertical="bottom" horizontal="right" data-cell></div>
-    </div>
-    <div class="win-msg" id="winMsg">
-      <div data-win-msg-text></div>
-      <button id="restartButton">Restart</button>
+      <div id="emailForm" class="form-container">
+        <form
+          action="https://sheetdb.io/api/v1/cxropn6lu6n8d"
+          class="flex-column"
+          method="post"
+          id="playerEmailForm"
+          name="a11y-kopi"
+        >
+          <label for="playerEmail">Enter email to start game.</label>
+          <input type="email" name="data[name]" id="playerEmail" />
+
+          <button
+            class="submit-btn"
+            id="submitBtn"
+            type="submit"
+            onclick="startGame()"
+          >
+            Start Game
+          </button>
+        </form>
+      </div>
     </div>
   </body>
 </html>
