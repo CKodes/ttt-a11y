@@ -45,6 +45,7 @@ function addButtons(e) {
       buttonElement.classList.add('action-button');
       paraElement.classList.add('visually-hidden');
       paraElement.innerHTML = 'empty';
+      cell.classList.add('disable-mouseclicks');
 
       let insideBtns = document.querySelectorAll('.action-button');
       insideBtns.forEach(addName);

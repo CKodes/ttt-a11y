@@ -8,6 +8,7 @@
   --cell-size: 200px;
   --mark-size: calc(var(--cell-size) * 0.7);
   --main-blue-color: #416cdc;
+  --brand-blue-color: #648fff;
   --main-red-color: rgb(235, 94, 94);
   --main-purple-color: rgb(120, 94, 240);
   --main-yellow-color: rgb(255, 176, 0);
@@ -23,15 +24,26 @@ body {
   font-family: var(--main-font-family);
 }
 .visually-hidden {
-  /* clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
   clip-path: inset(50%);
   height: 1px;
   overflow: hidden;
   position: absolute;
   white-space: nowrap;
-  width: 1px; */
+  width: 1px;
   display: none;
 }
+
+.visual-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 .board {
   width: 100vw;
   height: 100vh;
@@ -47,7 +59,7 @@ body {
   width: var(--cell-size);
   height: var(--cell-size);
   /* background-color: black; */
-  border: 3px solid black;
+  border: 3px solid var(--main-black-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,7 +96,12 @@ body {
 .cell.x::after,
 .cell.circle::before,
 .cell.circle::after {
-  background-color: black;
+  background-color: var(--brand-blue-color);
+}
+
+.cell.circle::before,
+.cell.circle::after {
+  background-color: var(--main-red-color);
 }
 
 .board.x .cell:not(.x):not(.circle):hover::before,
@@ -133,34 +150,51 @@ body {
 .board.circle .cell:not(.x):not(.circle):hover::after {
   width: calc(var(--mark-size) * 0.7);
   height: calc(var(--mark-size) * 0.7);
-  background-color: white;
+  background-color: var(--main-white-color);
 }
 
 .win-msg {
   display: none;
   position: fixed;
+  font-family: var(--main-font-family);
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(238, 238, 238);
   justify-content: center;
   align-items: center;
-  color: white;
+  color: var(--main-black-color);
   font-size: 5rem;
   flex-direction: column;
 }
 
 .win-msg button {
   font-size: 3rem;
-  background-color: white;
-  border: 1px solid black;
-  padding: 0.25em, 0.5em;
   cursor: pointer;
+  font-size: 3rem;
+  font-family: var(--main-font-family);
+  padding: 1rem 2rem;
+  text-align: center;
+  margin: 3rem auto;
+  text-decoration: none;
+  color: var(--main-white-color);
+  background: var(--main-blue-color);
+  border-radius: 4px;
+  border-style: none;
+  transition: 0.2s ease-in-out 0s;
 }
 
 .win-msg button:hover {
-  background-color: black;
+  background-color: var(--main-blue-color);
+  transform: scale(1.1);
+  color: white;
+  border-color: white;
+}
+
+.win-msg button:focus {
+  background-color: var(--main-red-color);
+  transform: scale(1.1);
   color: white;
   border-color: white;
 }
@@ -177,7 +211,6 @@ body {
 
 .form-container {
   max-width: 70%;
-  /* background-color: red; */
 }
 
 .flex-column {
@@ -212,4 +245,75 @@ input {
   background: var(--main-blue-color);
   border-radius: 4px;
   border-style: none;
+}
+
+.disable-mouseclicks {
+  pointer-events: none;
+}
+
+.container {
+  width: 100vw;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  /* background-color: rgb(235, 94, 94); */
+}
+
+.grid-container1,
+.grid-container2,
+.grid-container3 {
+  /* background-color: #416cdc; */
+  flex: 3;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+}
+img {
+  float: right;
+  width: 70%;
+}
+
+.board-status-btn {
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-family: var(--main-font-family);
+  padding: 1rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  color: var(--main-white-color);
+  background: var(--main-blue-color);
+  border-radius: 4px;
+  border-style: none;
+}
+
+.board-status-btn:focus {
+  background-color: var(--main-red-color);
+  transform: scale(1.1);
+  color: white;
+  border-color: white;
+}
+
+.cvi-one,
+.cvi-two,
+.cvi-three,
+.cvi-four {
+  flex: 4;
+}
+
+.cvi-one {
+  background-color: var(--main-red-color);
+}
+
+.cvi-two {
+  background-color: var(--main-yellow-color);
+}
+.cvi-three {
+  background-color: var(--brand-blue-color);
+}
+.cvi-four {
+  background-color: var(--main-purple-color);
 }

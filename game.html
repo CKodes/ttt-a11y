@@ -4,20 +4,56 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Viga&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
     <script src="game.js" defer></script>
     <title>Tic Tac Toe Game</title>
   </head>
   <body>
-    <div id="playerTurn" aria-live="assertive"></div>
+    <div class="container">
+      <div class="cvi-one">&nbsp</div>
+      <div class="cvi-two">&nbsp</div>
+      <div class="cvi-three">&nbsp</div>
+      <div class="cvi-four">&nbsp</div>
+    </div>
+
+    <div class="container">
+      <div class="grid-container2">
+        <button
+          class="board-status-btn"
+          id="announcer-button"
+          onclick="readBoardStatus()"
+        >
+          Read Board Status
+        </button>
+      </div>
+      <div class="grid-container1" id="playerTurn" aria-live="assertive"></div>
+
+      <div class="grid-container3">
+        <img class="float-right" src="images/logo3.png" alt="" />
+      </div>
+    </div>
+
+    <div
+      id="boardAnnouncer"
+      class="visually-hidden"
+      aria-live="assertive"
+    ></div>
+
+    <!-- <div id="playerTurn" aria-live="assertive"></div>
     <div
       id="boardAnnouncer"
       class="visually-hidden"
       aria-live="assertive"
     ></div>
     <button id="announcer-button" onclick="readBoardStatus()">
-      Board Status
-    </button>
+      Read Board Status
+    </button> -->
 
     <div class="board" id="board">
       <div class="cell" vertical="top" horizontal="left" data-cell></div>
